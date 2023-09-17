@@ -69,6 +69,10 @@ contract PoolManager is IPoolManager, Fees, NoDelegateCall, ERC1155, IERC1155Rec
         return (slot0.sqrtPriceX96, slot0.tick, slot0.protocolFees, slot0.hookFees);
     }
 
+    function getTickBitmapWordPosition(PoolId id, int16 wordPos) internal view returns (uint256) {
+        return pools[id].tickBitmap[wordPos];
+    }
+
     /// @inheritdoc IPoolManager
     function getLiquidity(PoolId id) external view override returns (uint128 liquidity) {
         return pools[id].liquidity;
@@ -319,7 +323,7 @@ contract PoolManager is IPoolManager, Fees, NoDelegateCall, ERC1155, IERC1155Rec
             }
         }
 
-        delta = _getPool(key).donate(amount0, amount1);
+        delta = getPoolState(key.toId()).donate(amount0, amount1);
 
         _accountPoolBalanceDelta(key, delta);
 
