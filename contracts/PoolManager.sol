@@ -69,7 +69,7 @@ contract PoolManager is IPoolManager, Fees, NoDelegateCall, ERC1155, IERC1155Rec
         return (slot0.sqrtPriceX96, slot0.tick, slot0.protocolFees, slot0.hookFees);
     }
 
-    function getTickBitmapWordPosition(PoolId id, int16 wordPos) internal view returns (uint256) {
+    function getTickBitmapWordPosition(PoolId id, int16 wordPos) external view returns (uint256) {
         return pools[id].tickBitmap[wordPos];
     }
 
