@@ -323,7 +323,7 @@ contract PoolManager is IPoolManager, Fees, NoDelegateCall, ERC1155, IERC1155Rec
             }
         }
 
-        delta = getPoolState(key.toId()).donate(amount0, amount1);
+        delta = _getPool(key).donate(amount0, amount1);
 
         _accountPoolBalanceDelta(key, delta);
 
